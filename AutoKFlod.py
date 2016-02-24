@@ -20,3 +20,8 @@ def modelfit(alg, dtrain, dtest, predictors, target, IDcol, filename):
 
     #Predict on testing data:
     dtest[target] = alg.predict(dtest[predictors])
+
+    #Export submission file:
+    IDcol.append(target)
+    submission = pd.DataFrame({ x: dtest[x] for x in IDcol})
+    submission.to_csv(filename, index=False)
